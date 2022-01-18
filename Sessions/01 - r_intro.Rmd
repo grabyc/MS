@@ -1,0 +1,58 @@
+---
+title: "Intro a R y RStudio"
+subtitle: "R Sessions #01"
+author: "Gabriel Raby"
+date: "17/01/2022"
+output: 
+  html_document:
+    fig_height: 8
+    fig_width: 12
+    #code_folding: "hide"
+    toc: true
+    toc_float:
+      toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
+```
+
+# R y RStudio
+
+## El lenguaje R
+
+R es un *lenguaje de programación* y un entorno de trabajo para cálculos y gráficos estadísticos.
+
+- **Gratis**
+- **Reproducible**: el uso de un lenguaje de programación para proyectos de análisis y gestión de datos (en oposición a Excel y otras herramientas del tipo point & click) mejora la reproducibilidad y facilita la detección de errores.
+- **Comunidad**: R tiene una comunidad de usuarios vibrante y colaborativa. Se desarrollan nuevos paquetes y herramientas a diario. Como ejemplo, [R Ladies](https://rladies.org/) es una organización global cuya misión es promover la diversidad de géneros en la comunidad de R, y es una de las organizaciones de usuarios de R más grande.
+- **Ciencia de datos**: es un entorno creado para facilitar la creación de proyectos de ciencia de datos, con librerías, paquetes, entornos de desarrollo y extensiones creados con ese fin.
+
+Para instalar R, hay que visitar el sitio [The R Project for Statistical Computing](https://www.r-project.org/) y descargar la última versión.
+
+> *Nota: las instrucciones de instalación están en el sitio web de R*
+
+## RStudio
+
+RStudio es un *entorno de programación integrado* (IDE por sus siglas em inglés) que provee una interfaz de usuario que agrega funcionalidades y herramientas que facilitan el uso de R.
+
+Para instalar RStudio Desktop, hay que visitar el sitio [RStudio](https://www.rstudio.com/) y descargar la última versión correspondiente al sistema operativo que se esté utilizando.
+
+> *Nota: las instrucciones de instalación están en el sitio web de RStudio*
+
+## Paquetes de R
+
+Los paquetes de R extienden la funcionalidad de R agregando funciones adicionales, conjuntos de datos y documentación. Son creados por usuarios de la comunidad global de R y pueden ser descargados gratuitamente de internet.
+
+# Bibliografía y links de interés
+
+- [The R Project for Statistical Computing](https://www.r-project.org/)
+- [RStudio](https://www.rstudio.com/)
+- [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
+- [R4epis Project](https://r4epis.netlify.app/)
+- [R for Data Science](https://r4ds.had.co.nz/)
