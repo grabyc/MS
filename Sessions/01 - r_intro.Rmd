@@ -67,6 +67,8 @@ library(tidyverse)
 
 A partir de tener los datos ordenados, se pueden seguir dos caminos complementarios para generar información: visualización y modelado.
 
+- **Visualización**: mediante la visualización de datos es posible obtener *insights* valiosos que no era posible conseguir solo mirando los datos crudos; los distintos gráficos proveen una buena manera de explorar patrones en los datos: presencia de valores atípicos (*outliers*), distribuciones de variables individuales, y relaciones entre grupos de variables.
+- **Modelado**: esta parte del proceso busca encontrar la relación entre una *variable respuesta o dependiente* y una *variable explicativa o independiente*
 
 # Bibliografía y links de interés
 
