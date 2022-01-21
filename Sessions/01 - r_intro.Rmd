@@ -29,9 +29,10 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
 R es un *lenguaje de programación* y un entorno de trabajo para cálculos y gráficos estadísticos.
 
 - **Gratis**
-- **Reproducible**: el uso de un lenguaje de programación para proyectos de análisis y gestión de datos (en oposición a Excel y otras herramientas del tipo point & click) mejora la reproducibilidad y facilita la detección de errores.
 - **Comunidad**: R tiene una comunidad de usuarios vibrante y colaborativa. Se desarrollan nuevos paquetes y herramientas a diario. Como ejemplo, [R Ladies](https://rladies.org/) es una organización global cuya misión es promover la diversidad de géneros en la comunidad de R, y es una de las organizaciones de usuarios de R más grande.
 - **Ciencia de datos**: es un entorno creado para facilitar la creación de proyectos de ciencia de datos, con librerías, paquetes, entornos de desarrollo y extensiones creados con ese fin.
+- **Reproducible**: cuando se realizan proyectos de análisis y gestión de datos en R (en oposición a Excel y otras herramientas del tipo point & click) estos deberían poder compartirse con otros colegas e investigadores para que ejecuten nuevamente todos los pasos del análisis desde el principio hasta el fin, y que lleguen a los mismos resultados.
+- **Auditable**: también deberían poder ser capaces de ver y entender todos los pasos en el análisis, así como también la historia de como se desarrollo la investigación. 
 
 Para instalar R, hay que visitar el sitio [The R Project for Statistical Computing](https://www.r-project.org/) y descargar la última versión.
 
@@ -49,10 +50,29 @@ Para instalar RStudio Desktop, hay que visitar el sitio [RStudio](https://www.rs
 
 Los paquetes de R extienden la funcionalidad de R agregando funciones adicionales, conjuntos de datos y documentación. Son creados por usuarios de la comunidad global de R y pueden ser descargados gratuitamente de internet.
 
+```{r}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+# Introducción a Ciencia de Datos
+
+## Proceso básico de trabajo en un proyecto de análisis de datos
+
+![Circuito de trabajo básico](./images/data-science.png)
+
+- **Importar**: se importan los datos a analizar en R; se pueden obtener de un archivo, una base de datos, de conectores API a aplicaciones externas, de páginas web, etc.
+- **Ordenar (Tidy)**: ordenar los datos significa almacenarlos en una manera consistente para que coincida la semántica del conjunto de datos con la forma en la que están almacenados; es decir, cuando los datos están ordenados, cada columna es una variable, y cada fila es una observación.
+- **Transformar**: esta etapa incluye enfocarse en las observaciones de interés, creando nuevas variables que sean funciones de variables existentes, y calculando un conjunto de estadísticos que sinteticen la información del conjunto.
+
+A partir de tener los datos ordenados, se pueden seguir dos caminos complementarios para generar información: visualización y modelado.
+
+
 # Bibliografía y links de interés
 
 - [The R Project for Statistical Computing](https://www.r-project.org/)
 - [RStudio](https://www.rstudio.com/)
 - [The Epidemiologist R Handbook](https://epirhandbook.com/en/index.html)
 - [R4epis Project](https://r4epis.netlify.app/)
+- [Data Science: A First Introduction](https://ubc-dsci.github.io/introduction-to-datascience/)
 - [R for Data Science](https://r4ds.had.co.nz/)
