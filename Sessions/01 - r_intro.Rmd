@@ -69,6 +69,9 @@ A partir de tener los datos ordenados, se pueden seguir dos caminos complementar
 
 - **Visualización**: mediante la visualización de datos es posible obtener *insights* valiosos que no era posible conseguir solo mirando los datos crudos; los distintos gráficos proveen una buena manera de explorar patrones en los datos: presencia de valores atípicos (*outliers*), distribuciones de variables individuales, y relaciones entre grupos de variables.
 - **Modelado**: esta parte del proceso busca encontrar la relación entre una *variable respuesta o dependiente* y una *variable explicativa o independiente*
+- **Comunicación**: el último paso de cualquier proyecto de análisis de datos. No importa cuan bien el modelado y la visualización hayan ayudado a comprender los datos a menos que los resultados puedan ser comunicados a otros.
+
+
 
 # Bibliografía y links de interés
 
