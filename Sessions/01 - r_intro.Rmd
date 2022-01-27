@@ -284,6 +284,100 @@ Todos los verbos operan de la misma manera:
 
 
 
+#### Filtrar filas con *filter()*
+
+Esta operación permite reducir las observaciones del dataset original en base a sus valores.  
+
+El primer argumento es el nombre del data frame; el segundo (y subsiguientes) son las expresiones que filtran el data frame.
+
+```{r filter}
+fallecidos_filter <- fallecidos_df %>%
+  filter(departamento == 'Confluencia', fecha >= '2021-01-01')
+
+head(fallecidos_filter)
+```
+
+
+
+#### Ordenar filas con *arrange()*
+
+Esta operación trabaja de forma similar a *filter()* excepto que en vez de seleccionar filas, les cambia el orden.
+
+Toma un data frama y un conjunto de nombres de columna para ordenar el conjunto.
+
+
+```{r arrange}
+fallecidos_arrange <- fallecidos_df %>%
+  filter(departamento == 'Confluencia', fecha >= '2021-01-01') %>%
+  arrange(desc(fecha), edad)
+
+head(fallecidos_arrange)
+```
+
+
+
+
+#### Seleccionar columnas con *select()*
+
+Esta función permite deshacernos de las columnas que no son de interés para nuestro análisis.
+
+
+```{r select}
+fallecidos_select <- fallecidos_df %>%
+  filter(departamento == 'Confluencia', fecha >= '2021-01-01') %>%
+  arrange(desc(fecha), edad) %>%
+  select(departamento, fallecido, sexo, edad, fecha)
+
+head(fallecidos_select)
+```
+
+
+
+#### Agregar nuevas columnas con *mutate()*
+
+Esta función nos permite crear nuevas columnas que sean función de columnas existentes. Estas nuevas columnas se agregan siempre al final del dataset.
+
+
+```{r mutate}
+fallecidos_mutate <- fallecidos_df %>%
+  filter(departamento == 'Confluencia', fecha >= '2021-01-01') %>%
+  arrange(desc(fecha), edad) %>%
+  select(departamento, fallecido, sexo, edad, fecha) %>%
+  mutate(grupo_etario = case_when(
+    edad <= 18 ~ "Menores de 18",
+    edad >= 60 ~ "Mayores de 60",
+    TRUE ~ "Adultos"
+  ) )
+
+head(fallecidos_mutate)
+```
+
+
+
+#### Resúmenes agrupados con *summarise()*
+
+Esta función agrupa todas las filas en una sola y crea un nuevo valor resumido.
+
+Para que tenga utilidad se debe usar en conjunto con *group_by()*, de esta forma se cambia la unidad de análisis a grupos individuales.
+
+
+
+```{r summarise}
+fallecidos_summarise <- fallecidos_df %>%
+  filter(departamento == 'Confluencia', fecha >= '2021-01-01') %>%
+  arrange(desc(fecha), edad) %>%
+  select(departamento, fallecido, sexo, edad, fecha) %>%
+  mutate(grupo_etario = case_when(
+    edad <= 18 ~ "Menores de 18",
+    edad >= 60 ~ "Mayores de 60",
+    TRUE ~ "Adultos"
+  ) ) %>%
+  group_by(grupo_etario) %>%
+  summarise(total_grupo_etario = n())
+
+head(fallecidos_summarise)
+```
+
 
 
 # Bibliografía y links de interés
