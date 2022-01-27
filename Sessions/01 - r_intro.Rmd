@@ -193,7 +193,98 @@ Hay otras funciones *geom_* disponibles:
 
 - **geom_smooth**: agrega líneas de tendencia al gráfico
 
+- **geom_boxplot**: crea diagramas de caja
+
+- **geom_histogram**: grafica histogramas
+
 - **geom_text**: permite agregar leyendas en el área del gráfico
+
+
+
+#### Agregando ajustes estéticos
+
+Es posible transmitir información adicional acerca de los datos mapeando las variables del conjunto de datos a distintos ajustes estéticos.
+
+Para mapear un ajuste estético a una variable, se asoocia el nombre del ajuste al nombre de la variable dentro de **aes()**.
+
+
+```{r aesthetics}
+# se filtran 'outliers'
+#fallecidos_sexo <- fallecidos_df
+fallecidos_sexo <- fallecidos_df %>%
+  filter(edad < 120)
+
+  
+ggplot(fallecidos_sexo) +
+  geom_histogram(aes(x = edad #, fill=sexo
+                     ))
+```
+
+
+Por ejemplo, en el gráfico anterior se asoció *fill* con la variable sexo para clasificar las observaciones según el valor de dicha variable.
+
+
+
+#### Facetas
+
+
+Otra forma de agregar variables, particularmente útil para variables categóricas, es dividir el gráfico en **facetas**, es decir, sub-gráficos que muestran cada uno subconjuntos de los datos originales.
+
+```{r facets}
+ggplot (fallecidos_sexo) +
+  geom_histogram(aes(x = edad, fill=sexo) ) +
+  facet_grid(provincia ~ sexo)
+```
+
+
+Para *facetar* un gráfico se usa:
+
+- **facet_wrap**: para dividir una única variable
+
+- **facet_grid**: para graficar una combinación de dos variables
+
+
+En ambos casos, el primer argumento es una *fórmula* (una estructura de datos de R, no un sinónimo de "ecuación"), que se crea con el símbolo **~**.
+
+
+
+
+### Transformación de datos
+
+
+
+En las secciones previas, ya vimos algunos ejemplos de transformaciones de datos: a partir de un data frame inicial, pudimos "acomodarlo" para presentarlo en las distintas gráficas.
+
+En todos los casos, estuvimos usando funciones del paquete **dplyr**, que forma parte de la colección *tidyverse*.
+
+
+
+Las operaciones básicas de este paquete son:
+
+- elegir observaciones según sus valores (*filter()*)
+
+- reordenar las filas (*arrange()*)
+
+- elegir variables por sus nombres (*select()*)
+
+- crear utilizando funciones nuevas variables a partir de variables existentes (*mutate()*)
+
+- agrupar valores en un único valor resumido (*summarise()*)
+
+
+
+Todos los verbos operan de la misma manera:
+
+1. el primer argumento que reciben es un data frame
+
+2. los argumentos siguientes describen qué hacer con el data frame recibido
+
+3. el resultado es un nuevo data frame
+
+
+
+
+
 
 # Bibliografía y links de interés
 
