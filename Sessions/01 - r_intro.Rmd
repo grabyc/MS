@@ -4,6 +4,8 @@ subtitle: "R Sessions #01"
 author: "Gabriel Raby"
 date: "17/01/2022"
 output: 
+  prettydoc::html_pretty:
+    theme: architect 
   html_document:
     fig_height: 8
     fig_width: 12
@@ -13,13 +15,22 @@ output:
       toc_collapsed: true
     toc_depth: 3
     number_sections: true
-    theme: paper
+    #theme: paper
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
+ipak <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) 
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+
+packages <- c("tidyverse")
+ipak(packages)
 ```
 
 # R y RStudio
@@ -29,22 +40,29 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE)
 R es un *lenguaje de programación* y un entorno de trabajo para cálculos y gráficos estadísticos.
 
 - **Gratis**
+
 - **Comunidad**: R tiene una comunidad de usuarios vibrante y colaborativa. Se desarrollan nuevos paquetes y herramientas a diario. Como ejemplo, [R Ladies](https://rladies.org/) es una organización global cuya misión es promover la diversidad de géneros en la comunidad de R, y es una de las organizaciones de usuarios de R más grande.
+
 - **Ciencia de datos**: es un entorno creado para facilitar la creación de proyectos de ciencia de datos, con librerías, paquetes, entornos de desarrollo y extensiones creados con ese fin.
-- **Reproducible**: cuando se realizan proyectos de análisis y gestión de datos en R (en oposición a Excel y otras herramientas del tipo point & click) estos deberían poder compartirse con otros colegas e investigadores para que ejecuten nuevamente todos los pasos del análisis desde el principio hasta el fin, y que lleguen a los mismos resultados.
-- **Auditable**: también deberían poder ser capaces de ver y entender todos los pasos en el análisis, así como también la historia de como se desarrollo la investigación. 
 
-Para instalar R, hay que visitar el sitio [The R Project for Statistical Computing](https://www.r-project.org/) y descargar la última versión.
+- **Reproducible**: cuando se realizan proyectos de análisis y gestión de datos en R (en oposición a Excel y otras herramientas del tipo *point & click*) estos deberían poder compartirse con otros colegas e investigadores para que ejecuten nuevamente todos los pasos del análisis desde el principio hasta el fin, y que lleguen a los mismos resultados.
 
-> *Nota: las instrucciones de instalación están en el sitio web de R*
+- **Auditable**: también deberían poder ser capaces de ver y entender todos los pasos en el análisis, así como también la historia de como se desarrolló la investigación. 
+
+
+
+> *Para instalar R, hay que visitar el sitio [The R Project for Statistical Computing](https://www.r-project.org/) y descargar la última versión.*
+
+
 
 ## RStudio
 
-RStudio es un *entorno de programación integrado* (IDE por sus siglas em inglés) que provee una interfaz de usuario que agrega funcionalidades y herramientas que facilitan el uso de R.
+RStudio es un *entorno de programación integrado* (*IDE* por sus siglas em inglés) que provee una interfaz de usuario que agrega funcionalidades y herramientas que facilitan el uso de R.
 
-Para instalar RStudio Desktop, hay que visitar el sitio [RStudio](https://www.rstudio.com/) y descargar la última versión correspondiente al sistema operativo que se esté utilizando.
 
-> *Nota: las instrucciones de instalación están en el sitio web de RStudio*
+> *Para instalar RStudio Desktop, hay que visitar el sitio [RStudio](https://www.rstudio.com/) y descargar la última versión correspondiente al sistema operativo que se esté utilizando.*
+
+
 
 ## Paquetes de R
 
@@ -55,23 +73,127 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
+Dentro de los muchos paquetes disponibles, uno muy utilizado es **tidyverse**, que es en realidad una colección de paquetes que comparten una misma filosofía sobre R y el trabajo con datos.  
+
+Algunos paquetes instalados en **tidyverse** son:  
+
+- **ggplot2**: paquete para crear gráficos de forma declarativa
+- **dplyr**: provee una gramática para manipulación de datos, ofreciendo un conjunto de verbos que resuelven los desafíos más comunes a la hora de trabajar con conjuntos de datos. 
+- **readr**: provee una forma rápida y amigable de leer datos rectangulares
+
+
+> *Para más paquetes, hay que visitar la página oficial de descargas de R, el [CRAN](https://cran.r-project.org/) y seleccionar la opción de Paquetes.*
+
+
+
 # Introducción a Ciencia de Datos
 
+
 ## Proceso básico de trabajo en un proyecto de análisis de datos
+
 
 ![Circuito de trabajo básico](./images/data-science.png)
 
 - **Importar**: se importan los datos a analizar en R; se pueden obtener de un archivo, una base de datos, de conectores API a aplicaciones externas, de páginas web, etc.
+
 - **Ordenar (Tidy)**: ordenar los datos significa almacenarlos en una manera consistente para que coincida la semántica del conjunto de datos con la forma en la que están almacenados; es decir, cuando los datos están ordenados, cada columna es una variable, y cada fila es una observación.
+
 - **Transformar**: esta etapa incluye enfocarse en las observaciones de interés, creando nuevas variables que sean funciones de variables existentes, y calculando un conjunto de estadísticos que sinteticen la información del conjunto.
+
+
 
 A partir de tener los datos ordenados, se pueden seguir dos caminos complementarios para generar información: visualización y modelado.
 
-- **Visualización**: mediante la visualización de datos es posible obtener *insights* valiosos que no era posible conseguir solo mirando los datos crudos; los distintos gráficos proveen una buena manera de explorar patrones en los datos: presencia de valores atípicos (*outliers*), distribuciones de variables individuales, y relaciones entre grupos de variables.
+- **Visualización**: mediante la visualización de datos es posible obtener *insights* valiosos que no era posible conseguir solo mirando los datos crudos; los distintos gráficos proveen una buena manera de explorar patrones en los 
+datos: presencia de valores atípicos (*outliers*), distribuciones de variables individuales, y relaciones entre grupos de variables.
+
 - **Modelado**: esta parte del proceso busca encontrar la relación entre una *variable respuesta o dependiente* y una *variable explicativa o independiente*
+
 - **Comunicación**: el último paso de cualquier proyecto de análisis de datos. No importa cuan bien el modelado y la visualización hayan ayudado a comprender los datos a menos que los resultados puedan ser comunicados a otros.
 
 
+
+
+
+## Exploración de Datos
+
+
+Esta etapa consiste en mirar los datos y generar hipótesis sobre los mismos de forma rápida; luego, en otra etapa se podrán analizar en más detalle.
+
+Para ello, vamos a trabajar a partir de la visualización (*ggplot2*) y de la transformación de datos (*dplyr*).
+
+
+
+### Visualización de datos
+
+Damos los primeros pasos y tratamos de responder la siguiente pregunta: 
+
+> *¿cómo fue la curva de fallecidos en Neuquén y en Río Negro?*.
+
+
+#### El data frame Covid19
+
+Para responder esta pregunta podemos usar el conjunto de datos provisto por el Ministerio de Salud nacional ([datos_covid](http://datos.salud.gob.ar/dataset/covid-19-casos-registrados-en-la-republica-argentina)).  
+
+Este conjunto se cargó con el nombre de *fallecidos_df* en forma de **data frame**, una colección rectangular de variables (en las columnas) y de observaciones (en las filas)
+
+
+```{r datos_covid}
+# se arma tabla de fechas x semana para que la serie de tiempo no quede con 'huecos'
+calendar <- as.data.frame(seq(as.Date("2020/2/3"), as.Date("2022/1/20"), "week"))
+names(calendar)[1] <- "semana"
+periodos <- calendar %>%
+  mutate(periodo = strftime(semana, format = "%Y-%W"))
+
+# se carga la tabla de fallecidos desde un archivo .csv
+fallecidos_df <- read.csv("/home/user00/MS/Sessions/data/fallecidosCovid_NQN_RN.csv")
+glimpse(fallecidos_df)
+```
+
+
+Entre las variables de *fallecidos_df* se encuentran:  
+
+- provincia: con valores Neuquén o Río Negro
+
+- fallecido: cantidad de personas fallecidas durante la semana
+
+- fecha: primer día de la semana (*Nota: este dato no se corresponde con la definición de semana epidemiológica*)
+
+
+#### Creando un ggplot
+
+Con el paquete **ggplot2**, se inicia un gráfico con la función *ggplot()*.
+
+Esta función crea un sistema de coordenadas al que se le puede agregar una o más capas.
+
+
+```{r primer ggplot}
+# se 'acomoda' la tabla de datos para poder graficar las curvas de interés
+fallecidos <- fallecidos_df %>%
+  mutate(periodo = format(as.Date(fecha), "%Y-%W")) %>%
+  count(provincia, periodo, name = "cant_fallecidos") %>%
+  left_join(periodos, fallecidos, by = c("periodo")) %>%
+  mutate(cant_fallecidos = replace_na(cant_fallecidos, 0)) %>%
+  filter(semana >= "2020-03-20")
+
+  
+ggplot(data = fallecidos) +
+  geom_line(mapping = aes(x = semana, y = cant_fallecidos,
+                 colour = provincia))
+```
+
+
+Por ejemplo, la función *geom_line* agrega una capa de líneas al gráfico.
+
+Hay otras funciones *geom_* disponibles:
+
+- **geom_bar**: permite crear gráficos de barra
+
+- **geom_point**: crea gráficos de dispersión
+
+- **geom_smooth**: agrega líneas de tendencia al gráfico
+
+- **geom_text**: permite agregar leyendas en el área del gráfico
 
 # Bibliografía y links de interés
 
@@ -81,3 +203,7 @@ A partir de tener los datos ordenados, se pueden seguir dos caminos complementar
 - [R4epis Project](https://r4epis.netlify.app/)
 - [Data Science: A First Introduction](https://ubc-dsci.github.io/introduction-to-datascience/)
 - [R for Data Science](https://r4ds.had.co.nz/)
+- [Tidyverse](https://www.tidyverse.org/)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org)
+- [Datos Covid-19 (Min. de Salud de la Rep. Argentina)](http://datos.salud.gob.ar/dataset/covid-19-casos-registrados-en-la-republica-argentina)
+
